@@ -1,13 +1,15 @@
 
 SRC=$(wildcard ./src/*.c)
 
+CFLAGS=-I./src
+CFLAGS=-g
 
-./test:$(patsubst %.c,%.c.o,$(SRC))
-	gcc -o $@ $^
+./main:$(patsubst %.c,%.c.o,$(SRC)) ./main.c.o
+	gcc $(CFLAGS) -o $@ $^
 
 %.c.o:%.c
-	gcc -c -o $@ $^
+	gcc $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm -rf $(patsubst %.c,%.c.o,$(SRC)) ./test
+	rm -rf $(patsubst %.c,%.c.o,$(SRC)) ./main.c.o ./main
 
