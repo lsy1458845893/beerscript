@@ -1,5 +1,5 @@
 
-SRC=$(wildcard ./*.c)
+SRC=$(wildcard ./src/*.c)
 
 
 ./test:$(patsubst %.c,%.c.o,$(SRC))

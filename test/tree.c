@@ -1,5 +1,5 @@
 
-#include "../bstree.h"
+#include "bstree.h"
 
 #include <stdlib.h>
 

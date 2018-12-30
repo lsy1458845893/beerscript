@@ -1,6 +1,6 @@
 
 
-SRC=$(wildcard ../*.c)
+SRC=$(wildcard ../src/*.c)
 
 all:$(patsubst %.c,test-%,$(wildcard *.c))
 

@@ -1,4 +1,4 @@
-#include "../bscompile.h"
+#include "bscompile.h"
 
 
 

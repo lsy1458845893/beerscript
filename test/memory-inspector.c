@@ -1,8 +1,8 @@
 
 
 #include "memory-inspector.h"
-#include "../bsctx.h"
-#include "../bsstring.h"
+#include "bsctx.h"
+#include "bsstring.h"
 #include <stdio.h>
 
 int main(int argc, char const *argv[]) {

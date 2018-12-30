@@ -1,13 +1,13 @@
 
 
-#include "../bsctx.h"
+#include "bsctx.h"
 #include "memory-inspector.h"
 
 #include <stdio.h>
 
-#include "../bserr.h"
-#include "../bslex.h"
-#include "../bsstring.h"
+#include "bserr.h"
+#include "bslex.h"
+#include "bsstring.h"
 
 typedef struct const_str_stream {
   char *str;
