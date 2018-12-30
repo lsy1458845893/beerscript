@@ -26,20 +26,14 @@ typedef struct bsast_s {
   } u;
 } bsast_t;
 
-typedef struct bsparse_s {
-  bslex_t lex;
-  bssize_t top, size;
-  bsast_t **stack;
-} bsparse_t;
+typedef struct bsast_ir_s {
+  bssize_t str_tab_size;
+  bsstring_t **str_tab;
+  bsast_t **code;
+} bsast_ir_t;
 
-static inline void bsparse_init(bsparse_t *p, bsstream_t *s) {
-  bslex_init(&p->lex, s);
-  p->top = p->size = 0;
-  p->stack = 0;
-}
+bsast_ir_t *bsparse_parse(bsctx_t *c, bsstream_t *s);
 
-void bsparse_deinit(bsctx_t *c, bsparse_t *p);
-void bsast_destory(bsctx_t *c, bsast_t *node);
-
+void bsast_ir_destory(bsctx_t *c, bsast_t *node);
 
 #endif

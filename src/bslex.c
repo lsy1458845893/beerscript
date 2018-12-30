@@ -351,7 +351,7 @@ static bsu8_t bslex_str_backslash(bsu8_t ch) {
 
 bsu16_t bslexi_next(bsctx_t *c, bslex_t *lex) {
   if (!c->jbuf)
-    return BSERROR_LEX_JBUF_CANNOT_NULL;
+    return BSTOK_EOF;
   switch (lex->type) { // cleanup last
   case BSTOK_ID:
   case BSTOK_STRING:
