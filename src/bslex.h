@@ -102,7 +102,7 @@ typedef struct bslex_s {
   bssize_t top, size;
   bsu8_t *buf;
   bsu8_t lastch;
-  bsu16_t type;
+  bsu8_t type;
   bssize_t line;
   bssize_t colunm;
   union {
@@ -124,7 +124,7 @@ static inline void bslex_init(bslex_t *lex, bsstream_t *stream) {
 
 void bslex_deinit(bsctx_t *c, bslex_t *lex);
 
-bsu16_t bslexi_next(bsctx_t *c, bslex_t *lex);
+bsu8_t bslexi_next(bsctx_t *c, bslex_t *lex);
 
 static inline bssize_t bslex_get_type(bslex_t *lex) { return lex->type; }
 static inline bsint_t bslex_get_inum(bslex_t *lex) { return lex->u.inum; }

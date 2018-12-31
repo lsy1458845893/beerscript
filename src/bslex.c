@@ -107,7 +107,7 @@ static void bslexi_push(bsctx_t *c, bslex_t *lex, bsu8_t ch) {
   bslexi_resize(c, lex);
 }
 
-static inline bsu16_t bslex__clean_ret(bslex_t *lex, bsu16_t type) {
+static inline bsu8_t bslex__clean_ret(bslex_t *lex, bsu8_t type) {
   lex->lastch = '\0';
   return lex->type = type;
 }
@@ -255,7 +255,7 @@ static const bsu8_t bslex_tok_len[] = {
       bs_memcmp(lex->buf, bslex_tok_str[BSLEX_INDEX_##type], lex->top) == 0)                                           \
     return BSTOK_##type;
 
-static bsu16_t bslexi_match_keyword(bsctx_t *c, bslex_t *lex) {
+static bsu8_t bslexi_match_keyword(bsctx_t *c, bslex_t *lex) {
   switch (lex->buf[0]) {
   case 'a':
     bslex_type_check(ASYNC);
@@ -349,14 +349,14 @@ static bsu8_t bslex_str_backslash(bsu8_t ch) {
 
 #include <stdio.h>
 
-bsu16_t bslexi_next(bsctx_t *c, bslex_t *lex) {
-  if (!c->jbuf)
-    return BSTOK_EOF;
+bsu8_t bslexi_next(bsctx_t *c, bslex_t *lex) {
   switch (lex->type) { // cleanup last
   case BSTOK_ID:
   case BSTOK_STRING:
     bsstring_unrefer(c, lex->u.str);
   }
+  if (!c->jbuf)
+    return BSTOK_EOF;
   lex->type = BSTOK_EOF;
   bslexi_resize(c, lex);
   if (lex->top != 0)
@@ -592,7 +592,7 @@ bsu16_t bslexi_next(bsctx_t *c, bslex_t *lex) {
         }
       } else if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || ch == '_' || ch == '$') { // id or keyword
         bslexi_match_id(c, lex);
-        bsu16_t type;
+        bsu8_t type;
         if (type = bslexi_match_keyword(c, lex)) {
           lex->top = 0;
           lex->type = type;
