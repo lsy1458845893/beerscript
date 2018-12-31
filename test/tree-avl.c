@@ -6,7 +6,7 @@
 int space_number = 0;
 
 typedef struct set_s {
-  bstree_node_t head;
+  bsavl_node_t head;
   int num;
 } set_t;
 
@@ -15,17 +15,17 @@ void set_add(set_t **set, int n) {
   if (!node) {
     node = malloc(sizeof(set_t));
     space_number++;
-    bstree_node_init(node);
+    bsavl_init(node);
     node->num = n;
     *set = node;
   } else if (node->num == n) {
     return;
   } else if (n < node->num) {
     set_add(&node->head.left, n);
-    *set = bstree_balance(node);
+    *set = bsavl_balance(node);
   } else {
     set_add(&node->head.right, n);
-    *set = bstree_balance(node);
+    *set = bsavl_balance(node);
   }
 }
 
@@ -46,16 +46,16 @@ void set_remove(set_t **set, int n) {
   set_t *node = *set;
   if (node) {
     if (node->num == n) {
-      *set = bstree_remove(node);
+      *set = bsavl_remove(node);
       free(node);
       space_number--;
-      *set = bstree_balance(*set);
+      *set = bsavl_balance(*set);
     } else if (n < node->num) {
       set_remove(&node->head.left, n);
-      *set = bstree_balance(*set);
+      *set = bsavl_balance(*set);
     } else {
       set_remove(&node->head.right, n);
-      *set = bstree_balance(*set);
+      *set = bsavl_balance(*set);
     }
   } else {
     printf("not find %d!\n", n);
